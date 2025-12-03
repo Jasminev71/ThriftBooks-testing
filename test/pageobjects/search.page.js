@@ -1,4 +1,4 @@
-import { $,expect } from '@wdio/globals';
+import { $ } from '@wdio/globals';
 
 class SearchPage {
  get container() { return $("body")} 

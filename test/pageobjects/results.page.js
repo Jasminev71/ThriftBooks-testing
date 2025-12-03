@@ -11,14 +11,14 @@ class ResultsPage  {
     get conditionTag() {return $()}
 
  async filterTagsVisible() {
-    //this will ensure that the selcted tags are visable
+    await this.selectedDisplay.waitForDisplayed();
  }
  async addFilterTags () {
 //this will add filter tags and be visabele from slected section
  }
 
  async clearAll() {
-    
+
   await this.clearBtn.waitForClickable();
   await this.clearBtn.click();
   await expect(this.tag("Show Out Of Stock Items")).not.toBeDisplayed()
