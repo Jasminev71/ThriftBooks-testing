@@ -1,6 +1,7 @@
 import { $ } from '@wdio/globals';
+import Page from './page.js';
 
-class BookDetails {
+class BookDetails extends Page {
     get formatHardcover() { return $("//button[@type='button'])[10]")}
     get formatPaperBack() { return $("//button[@class='NewButton WorkSelector-button is-selected']")}
     get formatMassMarket() { return $("(//button[@type='button'])[12]")}
