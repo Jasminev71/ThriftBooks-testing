@@ -1,9 +1,7 @@
 import { browser } from '@wdio/globals';
 
-module.exports = {
-    open (path) {
-        return browser.url(`https://www.thriftbooks.com`)
+export default class Page {
+    async open(path = '/') {
+        return browser.url(`https://www.thriftbooks.com${path}`);
     }
 }
-
-export default new Page(); 
