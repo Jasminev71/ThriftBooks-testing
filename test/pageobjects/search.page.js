@@ -10,25 +10,25 @@ class SearchPage extends Page {
  
 
 
- async basicSearchBtn() {
+ async basicSearchBtn(term) {
    
     await this.searchField.waitForDisplayed();
-    await this.searchField.setValue('Mistborn');
+    await this.searchField.setValue(term);
     await this.searchButton.click()
     await expect(ResultsPage.resultHeader).toBeDisplayed();
 
  }
  
- async basicSearchKey() {
+ async basicSearchKey(term) {
    await this.searchField.waitForDisplayed();
-   await this.searchField.setValue('Way of Kings');
+   await this.searchField.setValue(term);
    await browser.keys('Enter')
    await expect(ResultsPage.resultHeader).toBeDisplayed();
  }
  
- async invaildSearch() {
+ async invaildSearch(term) {
     await this.searchField.waitForClickable();
-    await this.searchField.setValue('BookTitle1234');
+    await this.searchField.setValue(term);
     await this.searchButton.click();
  }
 
@@ -44,49 +44,49 @@ class SearchPage extends Page {
     await expect(ResultsPage.resultHeader).toBeDisplayed();
  }
 
- async shortSearch() {
+ async shortSearch(term) {
     await this.searchField.waitForClickable();
-    await this.searchField.setValue('a')
+    await this.searchField.setValue(term)
     await this.searchButton.click();
  }
 
- async longSearch() {
+ async longSearch(term) {
     await this.searchField.waitForClickable();
-    await this.searchField.setValue('b'.repeat(250));
+    await this.searchField.setValue(term.repeat(250));
     await this.searchButton.click();
  }
  
- async authorName() {
+ async authorName(term) {
     await this.searchField.waitForDisplayed();
-    await this.searchField.setValue('Brandon Sanderson');
+    await this.searchField.setValue(term);
     await this.searchButton.click();
     await expect(ResultsPage.resultHeader).toBeDisplayed();
  }
 
- async isbnLookUp() {
+ async isbnLookUp(term) {
     await this.searchField.waitForDisplayed();
-    await this.searchField.setValue('9780765326355');
+    await this.searchField.setValue(term);
     await this.searchButton.click();
  }
 
- async specialCharSearch() {
+ async specialCharSearch(term) {
    await this.searchField.waitForDisplayed();
-   await this.searchField.setValue('#$^*^*(=)')
+   await this.searchField.setValue(term)
    await this.searchButton.click()
    await expect(ResultsPage.resultHeader).toBeDisplayed();
    
  }
  
- async trailingSpaces() {
+ async trailingSpaces(term) {
    await this.searchField.waitForDisplayed();
-   await this.searchField.setValue('  The alloy of law  ');
+   await this.searchField.setValue(term);
    await this.searchButton.click();
    await expect(ResultsPage.resultHeader).toBeDisplayed();
  }
  
- async caseInsensitivity() {
+ async caseInsensitivity(term) {
    await this.searchField.waitForDisplayed();
-   await this.searchField.setValue('oaThBrInGER');
+   await this.searchField.setValue(term);
    await this.searchButton.click();
    await expect(ResultsPage.resultHeader).toBeDisplayed();
  }
