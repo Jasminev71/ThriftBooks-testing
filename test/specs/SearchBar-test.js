@@ -1,7 +1,7 @@
 import SearchPage from '../pageobjects/search.page.js';
 
 
-describe.skip('SearchBar Tesing', () => {
+describe('SearchBar Tesing', () => {
    beforeEach(async () => { 
       await SearchPage.open();
       

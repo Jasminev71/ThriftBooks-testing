@@ -6,13 +6,13 @@ describe('Automation testing for Selction section of Thriftbooks.com', () => {
         await ResultsPage.open()
     })
     
-    it.skip('selected section displays search query', async () => {
+    it('selected section displays search query', async () => {
         await ResultsPage.selectedSectionVisible()
         await ResultsPage.searchResults()
 
     })
 
-    it.skip('Selected section Honors selected fitlers', async () => {
+    it('Selected section Honors selected fitlers', async () => {
         await ResultsPage.addMultipleTags()
         await ResultsPage.addMultipleTagsVisible()
     })

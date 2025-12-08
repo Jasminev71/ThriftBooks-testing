@@ -1,5 +1,5 @@
 // test/pageobjects/results.page.js
-import { $, browser, expect } from '@wdio/globals';
+import { $, expect } from '@wdio/globals';
 import Page from './page';
 
 class ResultsPage extends Page {

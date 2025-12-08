@@ -2,7 +2,7 @@
 import BookDetails from '../pageobjects/bookDetails.page.js';
 
 
-describe.skip('Format Selection Buttons work as intended', () => {
+describe('Format Selection Buttons work as intended', () => {
     beforeEach(async () => {
         await BookDetails.open();
     })
