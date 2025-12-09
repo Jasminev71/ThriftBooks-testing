@@ -14,11 +14,6 @@ async formatClick(format) {
 }
 
 
- async Checkout() {
-    await this.checkOutBtn.waitForDisplayed()
-    await this.checkoutBtn.click();
- }
-    }
-
+}
 
 export default new BookDetails(); 
