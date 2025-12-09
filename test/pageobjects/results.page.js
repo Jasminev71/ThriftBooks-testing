@@ -1,5 +1,5 @@
 // test/pageobjects/results.page.js
-import { $, expect } from '@wdio/globals';
+import { $, browser, expect } from '@wdio/globals';
 import Page from './page';
 
 class ResultsPage extends Page {
@@ -8,43 +8,31 @@ class ResultsPage extends Page {
     }
 
     get clearBtn() {
-        return this.selectedDisplay.$('//a[contains(.,"Clear")]');
+        return $("//button[contains(@class,'Search-tag-close')]")
     }
 
     get resultHeader() {
         return $('.Search-sortBar-results');
     }
 
-    get searchResultsTag() {
-      return $("//div[@class='Search-tag' and contains(normalize-space(), 'the hobbit')]") 
-
-    }
-    get productTypeTag() {
-      return $("//label[contains(@class,'Checkbox')][.//span[normalize-space()='Books']]//input")
-    }
-
-    get productTypeTagdisplayed() {
-        return $("//div[@class='Search-tag' and contains(normalize-space(), 'Books')]") 
-
-    }
-
-
-    get genreTypeTag() {
-        return $("//label[contains(@class,'Checkbox')][.//span[normalize-space()='Fantasy']]//input")
-
-    }
-
-    get genreTypeTagDisplayed() {
-        return $("//div[@class='Search-tag' and contains(normalize-space(), 'Fantasy')]") 
-
-    }
-
     get selectedSection() {
         return $('.Search-filterGroup-title' )
+    
+    }
+    get searchBar() { 
+        
+        return $('input[placeholder="Search 19 million titles by title, author, or ISBN"]'); 
     }
 
-    async open() {
-        return super.open('/browse/?b.search=the%20hobbit#b.s=mostPopular-desc&b.p=1&b.pp=50&b.oos&b.tile')
+    get clearAllbtn() {
+        return $("//button[contains(@class,'Search-clearFilter-button')]")
+    }
+
+
+
+async open(search) {
+        await this.searchBar.setValue(search);
+        await browser.keys('Enter')
     }
     
 
@@ -53,13 +41,13 @@ class ResultsPage extends Page {
     }
 
     async clearAll() {
-        await this.clearBtn.waitForClickable();
-        await this.clearBtn.click();
+        await this.clearAllbtn.waitForClickable();
+        await this.clearAllbtn.click();
 
     }
 
     async clearOneFilter() {
-      
+      await this.clearBtn.click()
     }
 
     async searchResults() {
@@ -76,12 +64,8 @@ class ResultsPage extends Page {
         await expect(this.selectedSection).toBeDisplayed()
     }
 
-    async addMultipleTags() {
-        await this.productTypeTag.waitForClickable()
-        await this.genreTypeTag.waitForClickable()
-        await this.productTypeTag.click()
-        await this.genreTypeTag.click()
-    }
+
+
 }
 
 export default new ResultsPage(); 
