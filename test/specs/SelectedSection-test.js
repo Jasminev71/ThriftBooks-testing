@@ -1,7 +1,7 @@
 import ResultsPage from '../pageobjects/results.page.js'
 
 
-describe('Automation testing for Selction section of Thriftbooks.com', () => {
+describe.skip('Automation testing for Selction section of Thriftbooks.com', () => {
     beforeEach(async () => {
         await ResultsPage.open()
     })

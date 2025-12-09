@@ -10,25 +10,25 @@ class SearchPage extends Page {
  
 
 
- async basicSearchBtn(term) {
+ async basicSearchBtn(search1) {
    
     await this.searchField.waitForDisplayed();
-    await this.searchField.setValue(term);
+    await this.searchField.setValue(search1);
     await this.searchButton.click()
     await expect(ResultsPage.resultHeader).toBeDisplayed();
 
  }
  
- async basicSearchKey(term) {
+ async basicSearchKey(searchkey) {
    await this.searchField.waitForDisplayed();
-   await this.searchField.setValue(term);
+   await this.searchField.setValue(searchkey);
    await browser.keys('Enter')
    await expect(ResultsPage.resultHeader).toBeDisplayed();
  }
  
- async invaildSearch(term) {
+ async invaildSearch(invalid) {
     await this.searchField.waitForClickable();
-    await this.searchField.setValue(term);
+    await this.searchField.setValue(invalid);
     await this.searchButton.click();
  }
 
@@ -44,49 +44,49 @@ class SearchPage extends Page {
     await expect(ResultsPage.resultHeader).toBeDisplayed();
  }
 
- async shortSearch(term) {
+ async shortSearch(shortID) {
     await this.searchField.waitForClickable();
-    await this.searchField.setValue(term)
+    await this.searchField.setValue(shortID)
     await this.searchButton.click();
  }
 
- async longSearch(term) {
+ async longSearch(longID) {
     await this.searchField.waitForClickable();
-    await this.searchField.setValue(term.repeat(250));
+    await this.searchField.setValue(longID.repeat(250));
     await this.searchButton.click();
  }
  
- async authorName(term) {
+ async authorName(name) {
     await this.searchField.waitForDisplayed();
-    await this.searchField.setValue(term);
+    await this.searchField.setValue(name);
     await this.searchButton.click();
     await expect(ResultsPage.resultHeader).toBeDisplayed();
  }
 
- async isbnLookUp(term) {
+ async isbnLookUp(isbn) {
     await this.searchField.waitForDisplayed();
-    await this.searchField.setValue(term);
+    await this.searchField.setValue(isbn);
     await this.searchButton.click();
  }
 
- async specialCharSearch(term) {
+ async specialCharSearch(specialChar) {
    await this.searchField.waitForDisplayed();
-   await this.searchField.setValue(term)
+   await this.searchField.setValue(specialChar)
    await this.searchButton.click()
    await expect(ResultsPage.resultHeader).toBeDisplayed();
    
  }
  
- async trailingSpaces(term) {
+ async trailingSpaces(spaces) {
    await this.searchField.waitForDisplayed();
-   await this.searchField.setValue(term);
+   await this.searchField.setValue(spaces);
    await this.searchButton.click();
    await expect(ResultsPage.resultHeader).toBeDisplayed();
  }
  
- async caseInsensitivity(term) {
+ async caseInsensitivity(cases) {
    await this.searchField.waitForDisplayed();
-   await this.searchField.setValue(term);
+   await this.searchField.setValue(cases);
    await this.searchButton.click();
    await expect(ResultsPage.resultHeader).toBeDisplayed();
  }
