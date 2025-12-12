@@ -1,95 +1,44 @@
-import { $, browser } from '@wdio/globals';
-import Page from './page';
-import ResultsPage from './results.page';
+import { $, browser, expect } from '@wdio/globals';
+import HomePage from './Home.page';
 
-class SearchPage extends Page {
+
+class SearchPage extends HomePage {
  
  get searchField() { return $('input[placeholder="Search 19 million titles by title, author, or ISBN"]'); }
- get searchButton() { return $('.header-search-submit');}
+ get searchButton() { return $('.header-search-submit'); }
  get clearSearchField() { return $('.header-search-reset'); }
- 
+get resultHeader() {  return $('.Search-sortBar-results'); }
+get titleHeader() { return $('h1[itemprop="name"]'); }
 
+async runSearchtests() {
+   const search = ['Mistborn', 'Dracula', 'BookTitle123', 'a', 'b'.repeat(250), 'Brandon Sanderson','!)#$)@', '  Way of kings  ', 'OaTHbRinger'];
+      for (const book of search ) {
+            await this.searchField.waitForDisplayed();
+            await this.searchField.setValue(book);
+            await this.searchButton.click();
+            await expect(this.resultHeader).toBeDisplayed();
+            
+            await this.searchField.setValue(book);
+            await browser.keys('Enter');
+            await expect(this.resultHeader).toBeDisplayed();
 
- async basicSearchBtn(search1) {
-   
-    await this.searchField.waitForDisplayed();
-    await this.searchField.setValue(search1);
-    await this.searchButton.click()
-    await expect(ResultsPage.resultHeader).toBeDisplayed();
+            await this.clearSearchField.click();
+            await this.searchField.waitForDisplayed()
+         }
 
- }
- 
- async basicSearchKey(searchkey) {
+      
+      }
+
+async isbnSearch() {
    await this.searchField.waitForDisplayed();
-   await this.searchField.setValue(searchkey);
-   await browser.keys('Enter')
-   await expect(ResultsPage.resultHeader).toBeDisplayed();
- }
- 
- async invaildSearch(invalid) {
-    await this.searchField.waitForClickable();
-    await this.searchField.setValue(invalid);
-    await this.searchButton.click();
- }
-
- async clearInput() {
-    await this.searchField.waitForClickable();
-    await this.basicSearch();
-    await this.clearSearchField.click();  
- }
-
- async searchSubmit() {
-    await this.searchField.waitForDisplayed();
-    await this.searchButton.click();
-    await expect(ResultsPage.resultHeader).toBeDisplayed();
- }
-
- async shortSearch(shortID) {
-    await this.searchField.waitForClickable();
-    await this.searchField.setValue(shortID)
-    await this.searchButton.click();
- }
-
- async longSearch(longID) {
-    await this.searchField.waitForClickable();
-    await this.searchField.setValue(longID.repeat(250));
-    await this.searchButton.click();
- }
- 
- async authorName(name) {
-    await this.searchField.waitForDisplayed();
-    await this.searchField.setValue(name);
-    await this.searchButton.click();
-    await expect(ResultsPage.resultHeader).toBeDisplayed();
- }
-
- async isbnLookUp(isbn) {
-    await this.searchField.waitForDisplayed();
-    await this.searchField.setValue(isbn);
-    await this.searchButton.click();
- }
-
- async specialCharSearch(specialChar) {
-   await this.searchField.waitForDisplayed();
-   await this.searchField.setValue(specialChar)
-   await this.searchButton.click()
-   await expect(ResultsPage.resultHeader).toBeDisplayed();
-   
- }
- 
- async trailingSpaces(spaces) {
-   await this.searchField.waitForDisplayed();
-   await this.searchField.setValue(spaces);
+   await this.searchField.setValue('014143984X')
    await this.searchButton.click();
-   await expect(ResultsPage.resultHeader).toBeDisplayed();
- }
- 
- async caseInsensitivity(cases) {
-   await this.searchField.waitForDisplayed();
-   await this.searchField.setValue(cases);
-   await this.searchButton.click();
-   await expect(ResultsPage.resultHeader).toBeDisplayed();
- }
+   await expect(this.titleHeader).toBeDisplayed();
+   
+   await this.searchField.setValue('014143984X');
+   await this.clearSearchField.click();
+   await this.searchField.waitForDisplayed()
+   }
 }
 
 
