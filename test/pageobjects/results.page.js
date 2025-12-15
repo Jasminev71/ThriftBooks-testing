@@ -1,4 +1,4 @@
-import { $, expect } from '@wdio/globals';
+import { $ } from '@wdio/globals';
 import HomePage from './Home.page';
 
 class ResultsPage extends HomePage {
