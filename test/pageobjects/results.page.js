@@ -1,70 +1,49 @@
-// test/pageobjects/results.page.js
-import { $, browser, expect } from '@wdio/globals';
-import Page from './page';
+import { $, expect } from '@wdio/globals';
+import HomePage from './Home.page';
 
-class ResultsPage extends Page {
+class ResultsPage extends HomePage {
     get selectedDisplay() {
         return $('//div[.//h3[normalize-space()="Selected"]]');
-    }
-
-    get clearBtn() {
-        return $("//button[contains(@class,'Search-tag-close')]")
     }
 
     get resultHeader() {
         return $('.Search-sortBar-results');
     }
 
-    get selectedSection() {
-        return $('.Search-filterGroup-title' )
-    
-    }
-    get searchBar() { 
-        
-        return $('input[placeholder="Search 19 million titles by title, author, or ISBN"]'); 
-    }
+    get selectedDisplay() {
+  return $('p.Search-filterGroup-title.Search-filter-header-text');
+  }
+   
+    get acceptBtn() { $('//button[normalize-space()="Accept"]');}
 
-    get clearAllbtn() {
-        return $("//button[contains(@class,'Search-clearFilter-button')]")
-    }
+    tagTitle(tag) {
+  return $(`//label[.//div[contains(@class,'Checkbox-label') and contains(normalize-space(), '${tag}')]]`);
+}
 
+async acceptCookies() {
+  const acceptBtn = $('//button[normalize-space()="Accept"]');
 
+  if (await acceptBtn.isDisplayed()) {
+    await acceptBtn.click();
+  }
+}
+async selectionTags() {
+  
+  await this.selectedDisplay.waitForDisplayed();
 
-async open(search) {
-        await this.searchBar.setValue(search);
-        await browser.keys('Enter')
-    }
-    
+  const tags = ['Books', 'Fiction', 'Hardcover', 'New'];
 
-    async filterTagsVisible() {
-        await this.selectedDisplay.waitForDisplayed();
-    }
-
-    async clearAll() {
-        await this.clearAllbtn.waitForClickable();
-        await this.clearAllbtn.click();
-
-    }
-
-    async clearOneFilter() {
-      await this.clearBtn.click()
-    }
-
-    async searchResults() {
-        await expect(this.searchResultsTag).toBeDisplayed()
-    }
-
-    async addMultipleTagsVisible() {
-        await expect(this.productTypeTagdisplayed).toBeDisplayed()
-        await expect(this.genreTypeTagDisplayed).toBeDisplayed()
-        
-    }
-
-    async selectedSectionVisible() {
-        await expect(this.selectedSection).toBeDisplayed()
-    }
+  for (const tag of tags) {
+    const checkbox = this.tagTitle(tag);
+    await checkbox.scrollIntoView();
+    await checkbox.waitForDisplayed();
+    await checkbox.click();
+    //click again to remove tag
+    await checkbox.click();
 
 
+   }
+  }
 
 }
 

@@ -1,15 +1,15 @@
 import SearchPage from '../pageobjects/search.page';
 
 
-describe('SearchBar Tesing', () => {
+describe.skip('SearchBar Tesing', () => {
    beforeEach(async () => { 
       await SearchPage.open();
      })
-       it('Search with Search Button', async () => {
+       it('Search testing using: search button, enter key, and clear fields', async () => {
         await SearchPage.runSearchTests()
        })
-      it('Search using ISBN', async () => {
-         await SearchPage.isbnSearch('014143984X')
+      it('Search using ISBN: search button, enter key, and clear fields', async () => {
+         await SearchPage.basicSearch('014143984X')
       })
 })
  

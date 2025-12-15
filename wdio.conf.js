@@ -53,7 +53,7 @@ exports.config = {
         browserName: 'chrome'
     }, {
         browserName: 'firefox'
-    }],
+        }],
 
     //
     // ===================

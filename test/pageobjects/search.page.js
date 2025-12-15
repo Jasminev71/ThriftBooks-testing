@@ -29,16 +29,22 @@ async runSearchTests() {
       
       }
 
-async isbnSearch(isbn) {
-   await this.searchField.waitForDisplayed();
-   await this.searchField.setValue(isbn)
-   await this.searchButton.click();
-   await expect(this.titleHeader).toBeDisplayed();
-   
-   await this.searchField.setValue(isbn);
-   await this.clearSearchField.click();
-   await this.searchField.waitForDisplayed()
-   }
+      async isbnSearch(isbn) {
+            await this.searchField.waitForDisplayed();
+            await this.searchField.setValue(isbn)
+            await this.searchButton.click();
+            await expect(this.titleHeader).toBeDisplayed();
+            
+            await this.searchField.setValue(isbn);
+            await this.clearSearchField.click();
+            await this.searchField.waitForDisplayed()
+         }
+
+      async basicSearch(search) {
+            await this.searchField.waitForDisplayed();
+            await this.searchField.setValue(search);
+            await this.searchButton.click()
+         }
 }
 
 

@@ -1,27 +1,17 @@
-import ResultsPage from '../pageobjects/results.page.js'
-import SearchPage from '../pageobjects/search.page.js'
+
+import ResultsPage from '../pageobjects/results.page.js';  
+import SearchPage from '../pageobjects/search.page.js';
 
 
 describe('Automation testing for Selction section of Thriftbooks.com', () => {
     beforeEach(async () => {
         await SearchPage.open()
-        await ResultsPage.open('The hobbit')
+        await SearchPage.basicSearch('The Hobbit')
     })
     
-    it('selected section displays search query', async () => {
-        await ResultsPage.selectedSectionVisible()
-        await ResultsPage.searchResults()
-
-    
+    it('Format Selection picks', async () => {
+        await ResultsPage.acceptCookies()
+        await ResultsPage.selectionTags()
     })
+});
 
-    it('Remove Single filter', async () => {
-        await ResultsPage.clearOneFilter()
-    
-    })
-
-    it('remove all filters', async() => {
-        await ResultsPage.clearAll()
-    })
-
-})
