@@ -4,7 +4,7 @@ import BookDetails from '../pageobjects/bookDetails.page.js';
 
 describe('Format Selection Buttons work as intended', () => {
     beforeEach(async () => {
-        await SearchPage.open();
+        await SearchPage.HomePage();
         await SearchPage.isbnSearch('9780765326355')
 
     })

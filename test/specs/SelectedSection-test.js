@@ -5,7 +5,7 @@ import SearchPage from '../pageobjects/search.page.js';
 
 describe('Automation testing for Selction section of Thriftbooks.com', () => {
     beforeEach(async () => {
-        await SearchPage.open()
+        await SearchPage.HomePage()
         await SearchPage.basicSearch('The Hobbit')
     })
     

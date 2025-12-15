@@ -3,7 +3,7 @@ import SearchPage from '../pageobjects/search.page';
 
 describe('SearchBar Tesing', () => {
    beforeEach(async () => { 
-      await SearchPage.open();
+     await SearchPage.HomePage()
      })
        it('Search testing using: search button, enter key, and clear fields', async () => {
         await SearchPage.runSearchTests()
